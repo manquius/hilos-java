@@ -28,7 +28,7 @@ public class Lambdas {
 
     private static void lambdas(List<Thread> list) {
         long startTime = System.currentTimeMillis();
-        list.stream().peek(x ->x.start()).collect(Collectors.toList());
+        list.stream().peek(x -> x.start()).collect(Collectors.toList());
         System.out.println("== continue ==");
         waitForAll(list);
         long endTime = System.currentTimeMillis();

@@ -12,15 +12,15 @@ public class ParallelWeb {
     private static int numThreads = 1000;
     private static boolean printInternals = false;
     private static List<Integer> intList = IntStream.rangeClosed(1, numThreads).boxed().collect(Collectors.toList());
-    private static List<Thread> heavyList = intList.stream().map(x -> new Thread(new WebProcessing("web" + x, printInternals))).collect(Collectors.toList());
-    private static List<Thread> sleepList = intList.stream().map(x -> new Thread(new ReactiveProcessing("reactive" + x, printInternals))).collect(Collectors.toList());
+    private static List<Thread> webList = intList.stream().map(x -> new Thread(new WebProcessing("web" + x, printInternals))).collect(Collectors.toList());
+    private static List<Thread> reactiveList = intList.stream().map(x -> new Thread(new ReactiveProcessing("reactive" + x, printInternals))).collect(Collectors.toList());
 
     public static void main(String[] args) {
         System.out.println("=== Starting heavy ===");
-        lambdas(heavyList);
+        lambdas(webList);
 
         System.out.println("Starting sleep");
-        lambdas(sleepList);
+        lambdas(reactiveList);
     }
 
     private static void lambdas(List<Thread> list) {
